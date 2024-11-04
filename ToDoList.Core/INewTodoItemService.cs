@@ -4,7 +4,7 @@ namespace ToDoList.Core
 {
     public interface INewTodoItemService
     {
-        TodoItem CreateItem(string description, DateTime? userProvidedDueDate, DueDateSettingOption dueDateSettingOption = DueDateSettingOption.SelectFirstAvailableDay);
-        Task ModifyDescription(string id, string description);
+        CoreTodoItem CreateItem(string description, DateTime? userProvidedDueDate, DueDateSettingOption dueDateSettingOption = DueDateSettingOption.SelectFirstAvailableDay);
+        Task<CoreTodoItem> ModifyDescription(string id, string description);
     }
 }

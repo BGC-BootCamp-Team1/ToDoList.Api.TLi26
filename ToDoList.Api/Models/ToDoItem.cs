@@ -1,5 +1,6 @@
 ﻿using MongoDB.Bson;
 using MongoDB.Bson.Serialization.Attributes;
+using ToDoList.Core.DueDateSettingStrategy;
 
 namespace ToDoList.Api.Models
 {
@@ -13,6 +14,8 @@ namespace ToDoList.Api.Models
         public bool Favorite { get; set; }
 
         [BsonRepresentation(BsonType.String)]
-        public DateTimeOffset CreatedTime { get; set; }
+        public DateTime CreatedTime { get; set; }
+        [BsonRepresentation(BsonType.String)]
+        public DateTime DueDate { get; set; }
     }
 }

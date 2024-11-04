@@ -1,16 +1,17 @@
 ﻿using ToDoList.Core.ApplicationExcepetions;
 namespace ToDoList.Core;
 
-public class TodoItem
+public class CoreTodoItem
 {
     public string Id { get; init; }
     public string Description { get; set; }
-    public bool IsComplete { get; set; } = false;
+    public bool Done { get; set; } = false;
+    public bool Favorite { get; set; } = false;
     public DateTime CreatedTime { get; set; } = DateTime.Now;
     public IList<Modification> Modifications { get; set; } = [];
     public DateTime DueDate { get; set; }
 
-    public TodoItem(string description, List<Modification> modifications, DateTime dueDate)
+    public CoreTodoItem(string description, List<Modification> modifications, DateTime dueDate)
     {
         Id = Guid.NewGuid().ToString();
         Description = description;
@@ -19,17 +20,17 @@ public class TodoItem
         DueDate = dueDate;
     }
 
-    public TodoItem(string description, DateTime dueDate)
+    public CoreTodoItem(string description, DateTime dueDate)
     {
         Id = Guid.NewGuid().ToString();
         Description = description;
-        IsComplete = false;
+        Done = false;
         CreatedTime = DateTime.Now;
         Modifications = [];
         DueDate = dueDate;
     }
 
-    public TodoItem()
+    public CoreTodoItem()
     {
     }
 

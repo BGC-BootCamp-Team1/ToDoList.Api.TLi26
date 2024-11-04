@@ -4,7 +4,7 @@ namespace ToDoList.Core.DueDateSettingStrategy
 {
     public class FirstAvailableDayStrategy : IDueDateSettingStrategy
     {
-        public DateTime GetDueDate(DateTime startDate, List<TodoItem> itemsDueInNextFiveDays)
+        public DateTime GetDueDate(DateTime startDate, List<CoreTodoItem> itemsDueInNextFiveDays)
         {
             for (int i = 0; i < 5; i++)
             {

@@ -5,7 +5,7 @@ namespace ToDoList.Core.DueDateSettingStrategy
     public static class DueDateSetter
     {
         public static DateTime AutoSetDueDate(
-            List<TodoItem> itemsDueInNextFiveDays,
+            List<CoreTodoItem> itemsDueInNextFiveDays,
             DueDateSettingOption dueDateSettingOption)
         {
             var strategy = SetStrategy(dueDateSettingOption);

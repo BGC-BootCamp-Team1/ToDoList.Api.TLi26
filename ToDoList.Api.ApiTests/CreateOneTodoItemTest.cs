@@ -70,8 +70,8 @@ namespace ToDoList.Api.ApiTests
             var todoItemRequst = new ToDoItemCreateRequest()
             {
                 Description = "test create",
-                Done = false,
-                Favorite = true,
+                UserProvidedDueDate = null,
+                DueDateSettingOption = 0
             };
 
             var json = JsonSerializer.Serialize(todoItemRequst);
@@ -90,8 +90,6 @@ namespace ToDoList.Api.ApiTests
 
             Assert.NotNull(returnedTodos);
             Assert.Equal("test create", returnedTodos.Description);
-            Assert.True(returnedTodos.Favorite);
-            Assert.False(returnedTodos.Done);
         }
 
 

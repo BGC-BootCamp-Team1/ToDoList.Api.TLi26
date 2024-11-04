@@ -4,7 +4,7 @@ namespace ToDoList.Core.DueDateSettingStrategy
 {
     public class FewestTodoItemsDayStrategy : IDueDateSettingStrategy
     {
-        public DateTime GetDueDate(DateTime startDate, List<TodoItem> itemsDueInNextFiveDays)
+        public DateTime GetDueDate(DateTime startDate, List<CoreTodoItem> itemsDueInNextFiveDays)
         {
             DateTime leastItemsDay = startDate;
             int leastItemsCount = int.MaxValue;

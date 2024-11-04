@@ -59,10 +59,10 @@ namespace ToDoList.Core.Test
             var description = "Test Todo Item";
             DateTime? userProvidedDueDate = null;
             DueDateSettingOption dueDateSettingOption = DueDateSettingOption.SelectFirstAvailableDay;
-            var todoItemsDueInNextFiveDays = new List<TodoItem>
+            var todoItemsDueInNextFiveDays = new List<CoreTodoItem>
             {
-                new TodoItem("Existing Item 1", DateTime.Now.AddDays(1)),
-                new TodoItem("Existing Item 2", DateTime.Now.AddDays(3))
+                new CoreTodoItem("Existing Item 1", DateTime.Now.AddDays(1)),
+                new CoreTodoItem("Existing Item 2", DateTime.Now.AddDays(3))
             };
             var mockRepository = new Mock<ITodoItemsRepository>();
             mockRepository
@@ -89,17 +89,17 @@ namespace ToDoList.Core.Test
             var description = "Test Todo Item";
             DateTime? userProvidedDueDate = null;
             DueDateSettingOption dueDateSettingOption = DueDateSettingOption.SelectFewestTodoItemsDay;
-            var todoItemsDueInNextFiveDays = new List<TodoItem>
+            var todoItemsDueInNextFiveDays = new List<CoreTodoItem>
             {
-                new TodoItem { DueDate = DateTime.Today.Date.AddDays(0) },
-                new TodoItem { DueDate = DateTime.Today.Date.AddDays(0) },
-                new TodoItem { DueDate = DateTime.Today.Date.AddDays(1) },
-                new TodoItem { DueDate = DateTime.Today.Date.AddDays(2) },
-                new TodoItem { DueDate = DateTime.Today.Date.AddDays(2) },
-                new TodoItem { DueDate = DateTime.Today.Date.AddDays(3) },
-                new TodoItem { DueDate = DateTime.Today.Date.AddDays(3) },
-                new TodoItem { DueDate = DateTime.Today.Date.AddDays(4) },
-                new TodoItem { DueDate = DateTime.Today.Date.AddDays(4) }
+                new CoreTodoItem { DueDate = DateTime.Today.Date.AddDays(0) },
+                new CoreTodoItem { DueDate = DateTime.Today.Date.AddDays(0) },
+                new CoreTodoItem { DueDate = DateTime.Today.Date.AddDays(1) },
+                new CoreTodoItem { DueDate = DateTime.Today.Date.AddDays(2) },
+                new CoreTodoItem { DueDate = DateTime.Today.Date.AddDays(2) },
+                new CoreTodoItem { DueDate = DateTime.Today.Date.AddDays(3) },
+                new CoreTodoItem { DueDate = DateTime.Today.Date.AddDays(3) },
+                new CoreTodoItem { DueDate = DateTime.Today.Date.AddDays(4) },
+                new CoreTodoItem { DueDate = DateTime.Today.Date.AddDays(4) }
             };
             var mockRepository = new Mock<ITodoItemsRepository>();
             mockRepository
@@ -123,7 +123,7 @@ namespace ToDoList.Core.Test
         public async Task ModifyDescription_ShouldModifyDescription()
         {
             // Arrange
-            TodoItem todoItem = new TodoItem
+            CoreTodoItem todoItem = new CoreTodoItem
             {
                 Id = "5f9a7d8e2d3b4a1eb8a7d8e2",
                 Description = "test",

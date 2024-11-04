@@ -72,7 +72,7 @@ namespace ToDoList.Api.Controllers
                 Description = toDoItemCreateRequest.Description,
                 Done = toDoItemCreateRequest.Done,
                 Favorite = toDoItemCreateRequest.Favorite,
-                CreatedTime = DateTimeOffset.UtcNow
+                CreatedTime = DateTime.Now
             };
             await _toDoItemService.CreateAsync(toDoItemDto);
             return Created("", toDoItemDto);

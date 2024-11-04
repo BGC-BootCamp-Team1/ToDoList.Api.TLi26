@@ -2,6 +2,6 @@
 {
     public interface IDueDateSettingStrategy
     {
-        public DateTime GetDueDate(DateTime startDate, List<TodoItem> itemsDueInNextFiveDays);
+        public DateTime GetDueDate(DateTime startDate, List<CoreTodoItem> itemsDueInNextFiveDays);
     }
 }

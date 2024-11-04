@@ -3,8 +3,8 @@
     public interface ITodoItemsRepository
     {
         public Task<long> CountTodoItemsOnTheSameDueDate(DateTime dueDate);
-        public Task<List<TodoItem>> GetTodoItemsDueInNextFiveDays();
-        public Task<TodoItem> FindById(string id);
-        void Save(TodoItem todoItem);
+        public Task<List<CoreTodoItem>> GetTodoItemsDueInNextFiveDays();
+        public Task<CoreTodoItem> FindById(string id);
+        public Task Save(CoreTodoItem todoItem);
     }
 }

@@ -45,17 +45,18 @@ public class TodoItemMongoRepositoryTest : IAsyncLifetime
     [Fact]
     public async void FindById_ShouldReturnCorrectItem()
     {
+        var id = Guid.NewGuid().ToString(); 
         var todoItemPo = new TodoItemPo
         {
-            Id = "5f9a7d8e2d3b4a1eb8a7d8e2",
+            Id = id,
             Description = "Buy groceries",
-            IsComplete = false
+            Done = false
         }; ;
         await _mongoCollection.InsertOneAsync(todoItemPo);
-        var todoItem = await _mongoRepository.FindById("5f9a7d8e2d3b4a1eb8a7d8e2");
+        var todoItem = await _mongoRepository.FindById(id);
 
         Assert.NotNull(todoItem);
-        Assert.Equal("5f9a7d8e2d3b4a1eb8a7d8e2", todoItem.Id);
+        Assert.Equal(id, todoItem.Id);
         Assert.Equal("Buy groceries", todoItem.Description);
     }
 
@@ -82,17 +83,17 @@ public class TodoItemMongoRepositoryTest : IAsyncLifetime
         var today = DateTime.Today.Date.ToUniversalTime();
         await _mongoCollection.InsertOneAsync(new TodoItemPo
         {
-            Id = ObjectId.GenerateNewId().ToString(),
+            Id = Guid.NewGuid().ToString(),
             DueDate = today.AddDays(3)
         });
         await _mongoCollection.InsertOneAsync(new TodoItemPo
         {
-            Id = ObjectId.GenerateNewId().ToString(),
+            Id = Guid.NewGuid().ToString(),
             DueDate = today.AddDays(4)
         });
         await _mongoCollection.InsertOneAsync(new TodoItemPo
         {
-            Id = ObjectId.GenerateNewId().ToString(),
+            Id = Guid.NewGuid().ToString(),
             DueDate = today.AddDays(5)
         });
 
@@ -109,13 +110,12 @@ public class TodoItemMongoRepositoryTest : IAsyncLifetime
     [Fact]
     public async void Save_ShouldNotThrowException()
     {
-        var todoItem = new ToDoList.Core.TodoItem
+        var todoItem = new ToDoList.Core.CoreTodoItem
         {
-            Id = "5f9a7d8e2d3b4a1eb8a7d8e2",
+            Id = Guid.NewGuid().ToString(),
             Description = "Buy groceries",
-            IsComplete = false
+            Done = false
         };
-        var exception = Record.Exception(() => _mongoRepository.Save(todoItem));
-        Assert.Null(exception);
+        await _mongoRepository.Save(todoItem);
     }
 }

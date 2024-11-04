@@ -46,13 +46,13 @@ namespace ToDoList.Core.Test
             // Arrange
             var dueDateSettingStrategy = new FirstAvailableDayStrategy();
             var startDate = new DateTime(2024, 11, 1);
-            var todoItemsDueInNextFiveDays = new List<TodoItem>
+            var todoItemsDueInNextFiveDays = new List<CoreTodoItem>
             {
-                new TodoItem { DueDate = new DateTime(2024, 11, 1) },
-                new TodoItem { DueDate = new DateTime(2024, 11, 1) },
-                new TodoItem { DueDate = new DateTime(2024, 11, 2) },
-                new TodoItem { DueDate = new DateTime(2024, 11, 3) },
-                new TodoItem { DueDate = new DateTime(2024, 11, 4) },
+                new CoreTodoItem { DueDate = new DateTime(2024, 11, 1) },
+                new CoreTodoItem { DueDate = new DateTime(2024, 11, 1) },
+                new CoreTodoItem { DueDate = new DateTime(2024, 11, 2) },
+                new CoreTodoItem { DueDate = new DateTime(2024, 11, 3) },
+                new CoreTodoItem { DueDate = new DateTime(2024, 11, 4) },
             };
 
             // Act
@@ -68,12 +68,12 @@ namespace ToDoList.Core.Test
             // Arrange
             var dueDateSettingStrategy = new FirstAvailableDayStrategy();
             var startDate = new DateTime(2024, 11, 1);
-            var todoItemsDueInNextFiveDays = new List<TodoItem>();
+            var todoItemsDueInNextFiveDays = new List<CoreTodoItem>();
             for (int i = 0; i < 5; i++)
             {
                 for (int j = 0; j < Constants.MAX_ITEM_SAME_DUEDAY; j++)
                 {
-                    todoItemsDueInNextFiveDays.Add(new TodoItem
+                    todoItemsDueInNextFiveDays.Add(new CoreTodoItem
                     {
                         DueDate = startDate.AddDays(i),
                     });
@@ -90,17 +90,17 @@ namespace ToDoList.Core.Test
             // Arrange
             var dueDateSettingStrategy = new FewestTodoItemsDayStrategy();
             var startDate = new DateTime(2024, 11, 1);
-            var todoItemsDueInNextFiveDays = new List<TodoItem>
+            var todoItemsDueInNextFiveDays = new List<CoreTodoItem>
             {
-                new TodoItem { DueDate = new DateTime(2024, 11, 1) },
-                new TodoItem { DueDate = new DateTime(2024, 11, 1) },
-                new TodoItem { DueDate = new DateTime(2024, 11, 2) },
-                new TodoItem { DueDate = new DateTime(2024, 11, 3) },
-                new TodoItem { DueDate = new DateTime(2024, 11, 3) },
-                new TodoItem { DueDate = new DateTime(2024, 11, 4) },
-                new TodoItem { DueDate = new DateTime(2024, 11, 4) },
-                new TodoItem { DueDate = new DateTime(2024, 11, 5) },
-                new TodoItem { DueDate = new DateTime(2024, 11, 5) },
+                new CoreTodoItem { DueDate = new DateTime(2024, 11, 1) },
+                new CoreTodoItem { DueDate = new DateTime(2024, 11, 1) },
+                new CoreTodoItem { DueDate = new DateTime(2024, 11, 2) },
+                new CoreTodoItem { DueDate = new DateTime(2024, 11, 3) },
+                new CoreTodoItem { DueDate = new DateTime(2024, 11, 3) },
+                new CoreTodoItem { DueDate = new DateTime(2024, 11, 4) },
+                new CoreTodoItem { DueDate = new DateTime(2024, 11, 4) },
+                new CoreTodoItem { DueDate = new DateTime(2024, 11, 5) },
+                new CoreTodoItem { DueDate = new DateTime(2024, 11, 5) },
             };
 
             // Act
@@ -116,12 +116,12 @@ namespace ToDoList.Core.Test
             // Arrange
             var dueDateSettingStrategy = new FewestTodoItemsDayStrategy();
             var startDate = new DateTime(2024, 11, 1);
-            var todoItemsDueInNextFiveDays = new List<TodoItem>();
+            var todoItemsDueInNextFiveDays = new List<CoreTodoItem>();
             for (int i = 0; i < 5; i++)
             {
                 for (int j = 0; j < Constants.MAX_ITEM_SAME_DUEDAY; j++)
                 {
-                    todoItemsDueInNextFiveDays.Add(new TodoItem
+                    todoItemsDueInNextFiveDays.Add(new CoreTodoItem
                     {
                         DueDate = startDate.AddDays(i),
                     });

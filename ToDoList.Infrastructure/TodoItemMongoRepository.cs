@@ -15,46 +15,46 @@ public class TodoItemMongoRepository : ITodoItemsRepository
         _todosCollection = mongoDatabase.GetCollection<TodoItemPo>(todoStoreDatabaseSettings.Value.CollectionName);
     }
 
-    public async Task<TodoItem> FindById(string? id)
+    public async Task<CoreTodoItem> FindById(string? id)
     {
         FilterDefinition<TodoItemPo?> filter = Builders<TodoItemPo>.Filter.Eq(x => x.Id, id);
         TodoItemPo? todoItemPo = await _todosCollection.Find(filter).FirstOrDefaultAsync();
 
         // 将 TodoItemPo 转换为 TodoItem
-        TodoItem todoItem = ConvertToTodoItem(todoItemPo);
+        CoreTodoItem todoItem = ConvertToTodoItem(todoItemPo);
         return todoItem;
     }
 
-    private TodoItem ConvertToTodoItem(TodoItemPo? todoItemPo)
+    private CoreTodoItem ConvertToTodoItem(TodoItemPo? todoItemPo)
     {
         if (todoItemPo == null) return null;
 
-        return new ToDoList.Core.TodoItem
+        return new ToDoList.Core.CoreTodoItem
         {
             Id = todoItemPo.Id,
             Description = todoItemPo.Description,
-            IsComplete = todoItemPo.IsComplete,
+            Done = todoItemPo.Done,
             DueDate = todoItemPo.DueDate,
             CreatedTime = todoItemPo.CreatedTime,
             Modifications = [.. todoItemPo.Modifications]
         };
     }
 
-    private TodoItemPo ConvertToTodoItemPo(TodoItem? todoItem)
+    private TodoItemPo ConvertToTodoItemPo(CoreTodoItem? todoItem)
     {
         if (todoItem == null) return null;
         return new TodoItemPo
         {
             Id = todoItem.Id,
             Description = todoItem.Description,
-            IsComplete = todoItem.IsComplete,
+            Done = todoItem.Done,
             CreatedTime = todoItem.CreatedTime,
             Modifications = [.. todoItem.Modifications],
             DueDate = todoItem.DueDate
         };
     }
 
-    public async void Save(TodoItem? todoItem)
+    public async Task Save(CoreTodoItem? todoItem)
     {
         ArgumentNullException.ThrowIfNull(todoItem);
         TodoItemPo todoItemPo = ConvertToTodoItemPo(todoItem);
@@ -79,7 +79,7 @@ public class TodoItemMongoRepository : ITodoItemsRepository
         return count;
     }
 
-    public async Task<List<TodoItem>> GetTodoItemsDueInNextFiveDays()
+    public async Task<List<CoreTodoItem>> GetTodoItemsDueInNextFiveDays()
     {
         var today = DateTime.Today.Date.ToUniversalTime();
 

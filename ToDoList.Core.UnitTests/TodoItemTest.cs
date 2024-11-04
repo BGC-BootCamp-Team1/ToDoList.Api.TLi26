@@ -14,7 +14,7 @@ namespace ToDoList.Core.Test
             new Modification(today.AddHours(12)),
             new Modification(today.AddHours(14))
             ];
-            TodoItem todoItem = new TodoItem("test", threeTodayModifications, today.AddDays(7));
+            CoreTodoItem todoItem = new CoreTodoItem("test", threeTodayModifications, today.AddDays(7));
             Assert.Throws<ExceedMaxModificationException>(() => todoItem.ModifyDescription("TEST"));
         }
 
@@ -27,7 +27,7 @@ namespace ToDoList.Core.Test
                 new Modification(today.AddDays(-1).AddHours(12)),
             new Modification(today.AddHours(12))
             ];
-            TodoItem todoItem = new TodoItem("test", twoTodayModifications, today.AddDays(7));
+            CoreTodoItem todoItem = new CoreTodoItem("test", twoTodayModifications, today.AddDays(7));
             todoItem.ModifyDescription("TEST_MODIFY");
             Assert.Equal("TEST_MODIFY", todoItem.Description);
         }
@@ -35,7 +35,7 @@ namespace ToDoList.Core.Test
         [Fact]
         public void Modify_ShouldModify_WhenFirstModification()
         {
-            TodoItem todoItem = new TodoItem("test", DateTime.Today.AddDays(7));
+            CoreTodoItem todoItem = new CoreTodoItem("test", DateTime.Today.AddDays(7));
 
             todoItem.ModifyDescription("TEST_MODIFY");
             Assert.Equal("TEST_MODIFY", todoItem.Description);
