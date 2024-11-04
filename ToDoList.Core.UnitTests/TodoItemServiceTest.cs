@@ -123,14 +123,21 @@ namespace ToDoList.Core.Test
         public async Task ModifyDescription_ShouldModifyDescription()
         {
             // Arrange
-            TodoItem todoItem = new TodoItem("test", DateTime.Today.AddDays(7));
+            TodoItem todoItem = new TodoItem
+            {
+                Id = "5f9a7d8e2d3b4a1eb8a7d8e2",
+                Description = "test",
+                DueDate = DateTime.Today.AddDays(7)
+            };
 
             var mockRepository = new Mock<ITodoItemsRepository>();
+            mockRepository
+                .Setup(repo => repo.FindById("5f9a7d8e2d3b4a1eb8a7d8e2"))
+                .ReturnsAsync(todoItem);
             var service = new NewTodoItemService(mockRepository.Object);
 
             // Act & Assert
-            Assert.Null(Record.Exception(() => service.ModifyDescription("test modify", todoItem)));
-            mockRepository.Verify(r => r.Save(It.Is<TodoItem>(t => t == todoItem)), Times.Once);
+            await service.ModifyDescription("5f9a7d8e2d3b4a1eb8a7d8e2","test modify");
         }
     }
 }

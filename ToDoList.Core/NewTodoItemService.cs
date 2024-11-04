@@ -24,12 +24,14 @@ namespace ToDoList.Core
                 var todoItemsDueInNextFiveDays = _todosRepository.GetTodoItemsDueInNextFiveDays().Result;
                 dueDate = DueDateSetter.AutoSetDueDate(todoItemsDueInNextFiveDays, dueDateSettingOption);
             }
-            TodoItem item = new TodoItem(description, dueDate);
-            return item;
+            TodoItem todoItem = new TodoItem(description, dueDate);
+            _todosRepository.Save(todoItem);
+            return todoItem;
         }
 
-        public void ModifyDescription(string description, TodoItem todoItem)
+        public async Task ModifyDescription(string id, string description)
         {
+            TodoItem todoItem = await _todosRepository.FindById(id);
             todoItem.ModifyDescription(description);
             _todosRepository.Save(todoItem);
         }

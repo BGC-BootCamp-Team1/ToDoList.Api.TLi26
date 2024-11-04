@@ -5,6 +5,7 @@ using ToDoList.Api.Models;
 using ToDoList.Api.Services;
 using ToDoList.Core;
 using ToDoList.Core.DueDateSettingStrategy;
+using ToDoList.Infrastructure;
 
 namespace ToDoList.Api.Controllers
 {
@@ -23,7 +24,6 @@ namespace ToDoList.Api.Controllers
         {
             _newTodoItemService = newTodoItemService;
             _logger = logger;
-
         }
 
 
@@ -53,7 +53,23 @@ namespace ToDoList.Api.Controllers
             return toDoItemDto;
         }
 
+        [HttpPut("{id}")]
+        [ProducesResponseType(typeof(ToDoItemDto), 200)]
+        [ProducesResponseType(typeof(ToDoItemDto), 201)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(500)]
+        [SwaggerOperation(
+            Summary = "Upsert Item",
+            Description = "Create or replace a to-do item by id"
+            )]
+        public async Task<ActionResult<ToDoItemDto>> PutAsync(string id, [FromBody] ToDoItemDto toDoItemDto)
+        {
 
-      
+            _newTodoItemService.ModifyDescription(id, toDoItemDto.Description);
+            return toDoItemDto;
+        }
+
+
+
     }
 }
