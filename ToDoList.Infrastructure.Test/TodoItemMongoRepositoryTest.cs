@@ -20,7 +20,7 @@ public class TodoItemMongoRepositoryTest : IAsyncLifetime
         {
             ConnectionString = "mongodb://localhost:27017/",
             DatabaseName = "TodoTestStore",
-            TodoItemsCollectionName = "Todos"
+            CollectionName = "Todos"
         });
 
         // 初始化 TodoService

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using ToDoList.Api.Models;
 using ToDoList.Api.Services;
+using ToDoList.Infrastructure;
 
 namespace ToDoList.Api.IntegrationTests
 {
@@ -19,7 +20,7 @@ namespace ToDoList.Api.IntegrationTests
                 c.ConfigureTestServices(
                     x =>
                     {
-                        x.PostConfigureAll<ToDoItemDatabaseSettings>(s => s.DatabaseName = "Test");
+                        x.PostConfigureAll<TodoStoreDatabaseSettings>(s => s.DatabaseName = "Test");
                         x.AddSingleton<IToDoItemService, InMemoryToDoItemService>();
                     });
             }

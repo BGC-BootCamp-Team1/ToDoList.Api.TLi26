@@ -14,15 +14,14 @@ namespace ToDoList.Api.Controllers
     [AllowAnonymous]
     public class ToDoItemsV2Controller : ControllerBase
     {
-
-        private readonly IToDoItemService _toDoItemService;
         private readonly INewTodoItemService _newTodoItemService;
         private readonly ILogger<ToDoItemsController> _logger;
 
-
-        public ToDoItemsV2Controller(IToDoItemService toDoItemService, ILogger<ToDoItemsController> logger)
+        public ToDoItemsV2Controller(
+            INewTodoItemService newTodoItemService,
+            ILogger<ToDoItemsController> logger)
         {
-            _toDoItemService = toDoItemService;
+            _newTodoItemService = newTodoItemService;
             _logger = logger;
 
         }
@@ -46,6 +45,11 @@ namespace ToDoList.Api.Controllers
                 Favorite = toDoItemCreateRequest.Favorite,
                 CreatedTime = DateTimeOffset.UtcNow
             };
+            _newTodoItemService.CreateItem(
+                toDoItemCreateRequest.Description,
+                toDoItemCreateRequest.UserProvidedDueDate,
+                toDoItemCreateRequest.DueDateSettingOption
+                );
             return toDoItemDto;
         }
 

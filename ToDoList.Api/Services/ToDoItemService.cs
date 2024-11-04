@@ -1,6 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using ToDoList.Api.Models;
+using ToDoList.Infrastructure;
 
 namespace ToDoList.Api.Services
 {
@@ -12,7 +13,7 @@ namespace ToDoList.Api.Services
         private readonly ILogger<ToDoItemService> _Logger;
 
         public ToDoItemService(
-            IOptions<ToDoItemDatabaseSettings> ToDoItemStoreDatabaseSettings, ILogger<ToDoItemService> logger)
+            IOptions<TodoStoreDatabaseSettings> ToDoItemStoreDatabaseSettings, ILogger<ToDoItemService> logger)
         {
             var mongoClient = new MongoClient(
                 ToDoItemStoreDatabaseSettings.Value.ConnectionString);

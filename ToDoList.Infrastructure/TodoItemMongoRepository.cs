@@ -12,7 +12,7 @@ public class TodoItemMongoRepository : ITodoItemsRepository
     {
         var mongoClient = new MongoClient(todoStoreDatabaseSettings.Value.ConnectionString);
         var mongoDatabase = mongoClient.GetDatabase(todoStoreDatabaseSettings.Value.DatabaseName);
-        _todosCollection = mongoDatabase.GetCollection<TodoItemPo>(todoStoreDatabaseSettings.Value.TodoItemsCollectionName);
+        _todosCollection = mongoDatabase.GetCollection<TodoItemPo>(todoStoreDatabaseSettings.Value.CollectionName);
     }
 
     public async Task<TodoItem> FindById(string? id)
