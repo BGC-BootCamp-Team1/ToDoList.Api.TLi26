@@ -38,18 +38,18 @@ namespace ToDoList.Api.Controllers
 
         public async Task<ActionResult<ToDoItemDto>> PostAsync([FromBody] ToDoItemCreateRequest toDoItemCreateRequest)
         {
-            var toDoItemDto = new ToDoItemDto
-            {
-                Description = toDoItemCreateRequest.Description,
-                Done = toDoItemCreateRequest.Done,
-                Favorite = toDoItemCreateRequest.Favorite,
-                CreatedTime = DateTimeOffset.UtcNow
-            };
-            _newTodoItemService.CreateItem(
+            CoreTodoItem todoItem = _newTodoItemService.CreateItem(
                 toDoItemCreateRequest.Description,
                 toDoItemCreateRequest.UserProvidedDueDate,
                 toDoItemCreateRequest.DueDateSettingOption
                 );
+            var toDoItemDto = new ToDoItemDto
+            {
+                Id = todoItem.Id,
+                Description = todoItem.Description,
+                CreatedTime = todoItem.CreatedTime,
+                DueDate = todoItem.DueDate
+            };
             return toDoItemDto;
         }
 
@@ -64,12 +64,17 @@ namespace ToDoList.Api.Controllers
             )]
         public async Task<ActionResult<ToDoItemDto>> PutAsync(string id, [FromBody] ToDoItemDto toDoItemDto)
         {
-
-            _newTodoItemService.ModifyDescription(id, toDoItemDto.Description);
-            return toDoItemDto;
+            CoreTodoItem coreTodoItem = await _newTodoItemService.ModifyDescription(id, toDoItemDto.Description);
+            var newItemDto = new ToDoItemDto
+            {
+                Id = coreTodoItem.Id,
+                Description = coreTodoItem.Description,
+                CreatedTime = coreTodoItem.CreatedTime,
+                DueDate = coreTodoItem.DueDate,
+                Done = coreTodoItem.Done,
+                Favorite = coreTodoItem.Favorite
+            };
+            return newItemDto;
         }
-
-
-
     }
 }
