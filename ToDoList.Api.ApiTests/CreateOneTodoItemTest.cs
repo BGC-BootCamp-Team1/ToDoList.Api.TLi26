@@ -50,6 +50,20 @@ namespace ToDoList.Api.ApiTests
             var response = await _client.PostAsync("/api/v1/todoitems", content);
 
             Assert.Equal(HttpStatusCode.Created, response.StatusCode);
+
+            var responseContent = await response.Content.ReadAsStringAsync();
+
+            var returnedTodos = JsonSerializer.Deserialize<ToDoItemDto>(responseContent, new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true
+            });
+
+            Assert.NotNull(returnedTodos);
+            Assert.Equal("test create", returnedTodos.Description);
+            Assert.True(returnedTodos.Favorite);
+            Assert.False(returnedTodos.Done);
         }
+
+
     }
 }
