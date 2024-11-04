@@ -2,7 +2,7 @@
 
 namespace ToDoList.Core
 {
-    public class NewTodoItemService
+    public class NewTodoItemService : INewTodoItemService
     {
         private readonly ITodoItemsRepository _todosRepository;
 

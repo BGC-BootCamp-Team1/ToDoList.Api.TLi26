@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using ToDoList.Api.Models;
 using ToDoList.Api.Services;
+using ToDoList.Core;
+using ToDoList.Core.DueDateSettingStrategy;
 
 namespace ToDoList.Api.Controllers
 {
@@ -14,6 +16,7 @@ namespace ToDoList.Api.Controllers
     {
 
         private readonly IToDoItemService _toDoItemService;
+        private readonly INewTodoItemService _newTodoItemService;
         private readonly ILogger<ToDoItemsController> _logger;
 
 
@@ -23,7 +26,6 @@ namespace ToDoList.Api.Controllers
             _logger = logger;
 
         }
-
 
 
         [HttpPost]
@@ -44,7 +46,6 @@ namespace ToDoList.Api.Controllers
                 Favorite = toDoItemCreateRequest.Favorite,
                 CreatedTime = DateTimeOffset.UtcNow
             };
-            await _toDoItemService.CreateAsync(toDoItemDto);
             return toDoItemDto;
         }
 
