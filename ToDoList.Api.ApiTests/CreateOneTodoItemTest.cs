@@ -35,7 +35,7 @@ namespace ToDoList.Api.ApiTests
         public Task DisposeAsync() => Task.CompletedTask;
 
         [Fact]
-        public async void should_create_todo_item()
+        public async void Should_create_todo_item()
         {
             var todoItemRequst = new ToDoItemCreateRequest()
             {

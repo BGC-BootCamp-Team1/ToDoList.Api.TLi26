@@ -34,7 +34,7 @@ public class GetOneTodoItemTest : IClassFixture<WebApplicationFactory<Program>>,
 
 
     [Fact]
-    public async void should_get_todo_by_given_id()
+    public async void Should_get_todo_by_given_id()
     {   
         // Arrange
         var todoItem = new ToDoItem
