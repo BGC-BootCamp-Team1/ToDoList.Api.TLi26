@@ -5,11 +5,15 @@ VisualStudioVersion = 17.7.34031.279
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.Api", "ToDoList.Api\ToDoList.Api.csproj", "{D6FC89B3-C286-4D2B-85CF-42528BF32E67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.Api.IntegrationTests", "ToDoList.Api.IntegrationTests\ToDoList.Api.IntegrationTests.csproj", "{89D5699B-740F-47EB-BE1C-367E998ADCA3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.Api.IntegrationTests", "ToDoList.Api.IntegrationTests\ToDoList.Api.IntegrationTests.csproj", "{89D5699B-740F-47EB-BE1C-367E998ADCA3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.Api.UnitTests", "ToDoList.Api.UnitTests\ToDoList.Api.UnitTests.csproj", "{7E332D9B-F813-43DA-BABC-F05E383AFCDF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.Api.UnitTests", "ToDoList.Api.UnitTests\ToDoList.Api.UnitTests.csproj", "{7E332D9B-F813-43DA-BABC-F05E383AFCDF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.Api.ApiTests", "ToDoList.Api.ApiTests\ToDoList.Api.ApiTests.csproj", "{B34B814F-3F46-44AF-9BCE-E5D994473695}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ToDoList.Api.ApiTests", "ToDoList.Api.ApiTests\ToDoList.Api.ApiTests.csproj", "{B34B814F-3F46-44AF-9BCE-E5D994473695}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.Core", "ToDoList.Core\ToDoList.Core.csproj", "{4C8355AE-EBAD-4EC0-87AF-306A3DA10CC0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ToDoList.Core.UnitTests", "ToDoList.Core.UnitTests\ToDoList.Core.UnitTests.csproj", "{1892E91F-E6BA-4FFC-9F45-6730316ECB76}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +37,14 @@ Global
 		{B34B814F-3F46-44AF-9BCE-E5D994473695}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B34B814F-3F46-44AF-9BCE-E5D994473695}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B34B814F-3F46-44AF-9BCE-E5D994473695}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C8355AE-EBAD-4EC0-87AF-306A3DA10CC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C8355AE-EBAD-4EC0-87AF-306A3DA10CC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C8355AE-EBAD-4EC0-87AF-306A3DA10CC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C8355AE-EBAD-4EC0-87AF-306A3DA10CC0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1892E91F-E6BA-4FFC-9F45-6730316ECB76}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1892E91F-E6BA-4FFC-9F45-6730316ECB76}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1892E91F-E6BA-4FFC-9F45-6730316ECB76}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1892E91F-E6BA-4FFC-9F45-6730316ECB76}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
