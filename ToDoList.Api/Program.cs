@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
 using ToDoList.Api;
+using ToDoList.Api.ExceptionFilter;
 using ToDoList.Api.Services;
 using ToDoList.Core;
 using ToDoList.Infrastructure;
@@ -10,8 +11,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 // Add services to the container.
-
-builder.Services.AddControllers();
+builder.Services.AddControllers(
+        options =>
+        {
+            options.Filters.Add<CustomExceptionFilter>();
+        }
+);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
