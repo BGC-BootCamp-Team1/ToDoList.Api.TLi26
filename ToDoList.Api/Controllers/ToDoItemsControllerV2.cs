@@ -62,9 +62,9 @@ namespace ToDoList.Api.Controllers
             Summary = "Upsert Item",
             Description = "Create or replace a to-do item by id"
             )]
-        public async Task<ActionResult<ToDoItemDto>> PutAsync(string id, [FromBody] ToDoItemDto toDoItemDto)
+        public async Task<ActionResult<ToDoItemDto>> PutAsync(string id, [FromQuery] string? newDescription = null)
         {
-            CoreTodoItem coreTodoItem = await _newTodoItemService.ModifyDescription(id, toDoItemDto.Description);
+            CoreTodoItem coreTodoItem = await _newTodoItemService.ModifyDescription(id, newDescription);
             var newItemDto = new ToDoItemDto
             {
                 Id = coreTodoItem.Id,

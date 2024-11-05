@@ -32,7 +32,18 @@ namespace ToDoList.Core
         public async Task<CoreTodoItem> ModifyDescription(string id, string description)
         {
             CoreTodoItem todoItem = await _todosRepository.FindById(id);
-            todoItem.ModifyDescription(description);
+            if (todoItem!= null)
+            {
+                todoItem.ModifyDescription(description);
+            }
+            else
+            {
+                todoItem = new CoreTodoItem()
+                {
+                    Id = id,
+                    Description = description
+                };
+            }
             await _todosRepository.Save(todoItem);
             return todoItem;
         }

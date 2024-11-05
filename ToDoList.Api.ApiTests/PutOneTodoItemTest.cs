@@ -111,36 +111,36 @@ namespace ToDoList.Api.ApiTests
         }
 
         [Fact]
-        public async void Should_PutAsync_ModifyTodoItem_v2()
+        public async Task Should_PutAsync_ModifyTodoItem_v2()
         {
+            // Arrange
             var id = Guid.NewGuid().ToString();
             
-            var todoItem = new ToDoItem
-            {
-                Id = id,
-                Description = "test description"
-            };
-            var todoItemDto = new ToDoItemDto
-            {
-                Id = id,
-                Description = "test modify"
-            };
-            await _mongoCollection.InsertOneAsync(todoItem);
-            var json = JsonSerializer.Serialize(todoItemDto);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await _client.PutAsync($"/api/v2/todoitemsv2/{id}", content);
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+            var toDoItem = new ToDoItemDto
+            {
+                Id = id,
+                Description = "Initial Description"
+            };
+            string newDescription = "NewDescription";
+            var requestUri = $"/api/v2/todoitemsV2/{id}?newDescription={newDescription}";
+            var content = new StringContent(newDescription, Encoding.UTF8, "application/json");
+
+            // Act
+            var response = await _client.PutAsync(requestUri, content);
+
+            // Assert
+            Assert.True(response.StatusCode == HttpStatusCode.OK || response.StatusCode == HttpStatusCode.Created);
 
             var responseContent = await response.Content.ReadAsStringAsync();
-
             var returnedTodos = JsonSerializer.Deserialize<ToDoItemDto>(responseContent, new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true
             });
-
-            Assert.NotNull(returnedTodos);
-            Assert.Equal("test modify", returnedTodos.Description);
+            
+            Assert.Equal(id, returnedTodos.Id);
+            Assert.Equal(newDescription, returnedTodos.Description);
         }
+        
     }
 }
