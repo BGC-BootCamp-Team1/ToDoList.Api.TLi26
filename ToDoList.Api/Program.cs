@@ -1,9 +1,9 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.OpenApi.Models;
 using ToDoList.Api;
+using ToDoList.Api.ExceptionFilter;
 using ToDoList.Api.Services;
 using ToDoList.Core;
-using ToDoList.Core.DueDateSettingStrategy;
 using ToDoList.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,8 +11,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 // Add services to the container.
-
-builder.Services.AddControllers();
+builder.Services.AddControllers(
+        options =>
+        {
+            options.Filters.Add<CustomExceptionFilter>();
+        }
+);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
@@ -55,10 +59,6 @@ builder.Services.AddAuthorization();
 builder.Services.AddSingleton<IToDoItemService, ToDoItemService>();
 builder.Services.AddSingleton<INewTodoItemService, NewTodoItemService>();
 builder.Services.AddSingleton<ITodoItemsRepository, TodoItemMongoRepository>();
-
-// Register the strategy classes
-//builder.Services.AddSingleton<IDueDateSettingStrategy, FirstAvailableDayStrategy>();
-//builder.Services.AddSingleton<FewestTodoItemsDayStrategy>();
 
 builder.Services.Configure<TodoStoreDatabaseSettings>(builder.Configuration.GetSection("ToDoItemDatabase"));
 var app = builder.Build();

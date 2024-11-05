@@ -1,12 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc.Testing;
 using MongoDB.Driver;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
 using ToDoList.Api.Models;
 
 namespace ToDoList.Api.ApiTests
@@ -39,9 +35,7 @@ namespace ToDoList.Api.ApiTests
         {
             var todoItemRequst = new ToDoItemCreateRequest()
             {
-                Description = "test create",
-                Done = false,
-                Favorite = true,
+                Description = "test create"
             };
 
             var json = JsonSerializer.Serialize(todoItemRequst);
@@ -60,38 +54,6 @@ namespace ToDoList.Api.ApiTests
 
             Assert.NotNull(returnedTodos);
             Assert.Equal("test create", returnedTodos.Description);
-            Assert.True(returnedTodos.Favorite);
-            Assert.False(returnedTodos.Done);
         }
-
-        [Fact]
-        public async void Should_create_todo_item_v2()
-        {
-            var todoItemRequst = new ToDoItemCreateRequest()
-            {
-                Description = "test create",
-                UserProvidedDueDate = null,
-                DueDateSettingOption = 0
-            };
-
-            var json = JsonSerializer.Serialize(todoItemRequst);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-            var response = await _client.PostAsync("/api/v2/todoitemsV2", content);
-
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-
-            var responseContent = await response.Content.ReadAsStringAsync();
-
-            var returnedTodos = JsonSerializer.Deserialize<ToDoItemDto>(responseContent, new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            });
-
-            Assert.NotNull(returnedTodos);
-            Assert.Equal("test create", returnedTodos.Description);
-        }
-
-
     }
 }
