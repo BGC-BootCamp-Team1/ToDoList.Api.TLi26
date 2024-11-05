@@ -4,6 +4,7 @@ using Moq;
 using ToDoList.Api.Controllers;
 using ToDoList.Api.Models;
 using ToDoList.Api.Services;
+using ToDoList.Core;
 
 namespace ToDoList.Api.UnitTests
 {
@@ -13,7 +14,12 @@ namespace ToDoList.Api.UnitTests
         public async Task CreateItem()
         {
             var mockLogger = new Mock<ILogger<ToDoItemsController>>();
-            var sut = new ToDoItemsController(new InMemoryToDoItemService(), mockLogger.Object);
+            var mockOldService = new InMemoryToDoItemService();
+            var mockNewService = new Mock<INewTodoItemService>();
+
+            //mockNewService.Setup(repo => repo.CountTodoItemsOnTheSameDueDate(It.IsAny<DateTime>()))
+            //    .ReturnsAsync(8);
+            var sut = new ToDoItemsController(mockOldService, mockNewService.Object, mockLogger.Object);
             var id = Guid.NewGuid().ToString();
             var toDoItem = new ToDoItemDto
             {

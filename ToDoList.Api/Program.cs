@@ -3,7 +3,6 @@ using Microsoft.OpenApi.Models;
 using ToDoList.Api;
 using ToDoList.Api.Services;
 using ToDoList.Core;
-using ToDoList.Core.DueDateSettingStrategy;
 using ToDoList.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -55,10 +54,6 @@ builder.Services.AddAuthorization();
 builder.Services.AddSingleton<IToDoItemService, ToDoItemService>();
 builder.Services.AddSingleton<INewTodoItemService, NewTodoItemService>();
 builder.Services.AddSingleton<ITodoItemsRepository, TodoItemMongoRepository>();
-
-// Register the strategy classes
-//builder.Services.AddSingleton<IDueDateSettingStrategy, FirstAvailableDayStrategy>();
-//builder.Services.AddSingleton<FewestTodoItemsDayStrategy>();
 
 builder.Services.Configure<TodoStoreDatabaseSettings>(builder.Configuration.GetSection("ToDoItemDatabase"));
 var app = builder.Build();

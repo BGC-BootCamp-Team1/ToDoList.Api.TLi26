@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Swashbuckle.AspNetCore.Annotations;
 using ToDoList.Api.Models;
 using ToDoList.Api.Services;
+using ToDoList.Core;
 
 namespace ToDoList.Api.Controllers
 {
@@ -14,12 +15,17 @@ namespace ToDoList.Api.Controllers
     {
 
         private readonly IToDoItemService _toDoItemService;
+        private readonly INewTodoItemService _newTodoItemService;
         private readonly ILogger<ToDoItemsController> _logger;
 
 
-        public ToDoItemsController(IToDoItemService toDoItemService, ILogger<ToDoItemsController> logger)
+        public ToDoItemsController(
+            IToDoItemService toDoItemService,
+            INewTodoItemService newTodoItemService,
+            ILogger<ToDoItemsController> logger)
         {
             _toDoItemService = toDoItemService;
+            _newTodoItemService = newTodoItemService;
             _logger = logger;
 
         }
@@ -64,17 +70,20 @@ namespace ToDoList.Api.Controllers
             Summary = "Create New Item",
             Description = "Create a new to-do item"
             )]
-
         public async Task<ActionResult<ToDoItemDto>> PostAsync([FromBody] ToDoItemCreateRequest toDoItemCreateRequest)
         {
+            CoreTodoItem todoItem = _newTodoItemService.CreateItem(
+                toDoItemCreateRequest.Description,
+                toDoItemCreateRequest.UserProvidedDueDate,
+                toDoItemCreateRequest.DueDateSettingOption
+                );
             var toDoItemDto = new ToDoItemDto
             {
-                Description = toDoItemCreateRequest.Description,
-                Done = toDoItemCreateRequest.Done,
-                Favorite = toDoItemCreateRequest.Favorite,
-                CreatedTime = DateTime.Now
+                Id = todoItem.Id,
+                Description = todoItem.Description,
+                CreatedTime = todoItem.CreatedTime,
+                DueDate = todoItem.DueDate
             };
-            await _toDoItemService.CreateAsync(toDoItemDto);
             return Created("", toDoItemDto);
         }
 
