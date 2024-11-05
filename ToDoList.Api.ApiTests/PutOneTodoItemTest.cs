@@ -114,24 +114,22 @@ namespace ToDoList.Api.ApiTests
         public async void Should_PutAsync_ModifyTodoItem_v2()
         {
             var id = Guid.NewGuid().ToString();
-            var toDoItemDto = new ToDoItemDto
+            
+            var todoItem = new ToDoItem
             {
                 Id = id,
                 Description = "test description"
             };
-            var todoItem = new ToDoItem
+            var todoItemDto = new ToDoItemDto
             {
                 Id = id,
-                Description = toDoItemDto.Description,
-                Done = toDoItemDto.Done,
-                Favorite = toDoItemDto.Favorite,
-                CreatedTime = toDoItemDto.CreatedTime
+                Description = "test modify"
             };
             await _mongoCollection.InsertOneAsync(todoItem);
-            var json = JsonSerializer.Serialize(toDoItemDto);
+            var json = JsonSerializer.Serialize(todoItemDto);
             var content = new StringContent(json, Encoding.UTF8, "application/json");
 
-            var response = await _client.PutAsync($"/api/v2/todoitems/{id}", content);
+            var response = await _client.PutAsync($"/api/v2/todoitemsv2/{id}", content);
             Assert.Equal(HttpStatusCode.OK, response.StatusCode);
 
             var responseContent = await response.Content.ReadAsStringAsync();
@@ -142,11 +140,7 @@ namespace ToDoList.Api.ApiTests
             });
 
             Assert.NotNull(returnedTodos);
-            Assert.Equal("test create", returnedTodos.Description);
-            Assert.True(returnedTodos.Favorite);
-            Assert.False(returnedTodos.Done);
+            Assert.Equal("test modify", returnedTodos.Description);
         }
-
-
     }
 }
