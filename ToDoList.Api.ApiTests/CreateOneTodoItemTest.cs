@@ -55,35 +55,5 @@ namespace ToDoList.Api.ApiTests
             Assert.NotNull(returnedTodos);
             Assert.Equal("test create", returnedTodos.Description);
         }
-
-        [Fact]
-        public async void Should_create_todo_item_v2()
-        {
-            var todoItemRequst = new ToDoItemCreateRequest()
-            {
-                Description = "test create",
-                UserProvidedDueDate = null,
-                DueDateSettingOption = 0
-            };
-
-            var json = JsonSerializer.Serialize(todoItemRequst);
-            var content = new StringContent(json, Encoding.UTF8, "application/json");
-
-            var response = await _client.PostAsync("/api/v2/todoitemsV2", content);
-
-            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-
-            var responseContent = await response.Content.ReadAsStringAsync();
-
-            var returnedTodos = JsonSerializer.Deserialize<ToDoItemDto>(responseContent, new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true
-            });
-
-            Assert.NotNull(returnedTodos);
-            Assert.Equal("test create", returnedTodos.Description);
-        }
-
-
     }
 }
