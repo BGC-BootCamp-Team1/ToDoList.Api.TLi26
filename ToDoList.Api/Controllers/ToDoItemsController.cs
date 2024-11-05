@@ -113,6 +113,30 @@ namespace ToDoList.Api.Controllers
             return isCreate ? Created("", toDoItemDto) : Ok(toDoItemDto);
         }
 
+        [HttpPut("{id}/description")]
+        [ProducesResponseType(typeof(ToDoItemDto), 200)]
+        [ProducesResponseType(typeof(ToDoItemDto), 201)]
+        [ProducesResponseType(400)]
+        [ProducesResponseType(500)]
+        [SwaggerOperation(
+            Summary = "Upsert Item",
+            Description = "Create or replace a to-do item by id"
+            )]
+        public async Task<ActionResult<ToDoItemDto>> PutDescriptionAsync(string id, [FromQuery] string? newDescription = null)
+        {
+            CoreTodoItem coreTodoItem = await _newTodoItemService.ModifyDescription(id, newDescription);
+            var newItemDto = new ToDoItemDto
+            {
+                Id = coreTodoItem.Id,
+                Description = coreTodoItem.Description,
+                CreatedTime = coreTodoItem.CreatedTime,
+                DueDate = coreTodoItem.DueDate,
+                Done = coreTodoItem.Done,
+                Favorite = coreTodoItem.Favorite
+            };
+            return newItemDto;
+        }
+
         [HttpDelete("{id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]

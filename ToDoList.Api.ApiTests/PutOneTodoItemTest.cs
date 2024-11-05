@@ -111,7 +111,7 @@ namespace ToDoList.Api.ApiTests
         }
 
         [Fact]
-        public async Task Should_PutAsync_ModifyTodoItem_v2()
+        public async Task Should_PutDescriptionAsync_ModifyTodoItem()
         {
             // Arrange
             var id = Guid.NewGuid().ToString();
@@ -123,7 +123,7 @@ namespace ToDoList.Api.ApiTests
                 Description = "Initial Description"
             };
             string newDescription = "NewDescription";
-            var requestUri = $"/api/v2/todoitemsV2/{id}?newDescription={newDescription}";
+            var requestUri = $"/api/v1/todoitems/{id}/description?newDescription={newDescription}";
             var content = new StringContent(newDescription, Encoding.UTF8, "application/json");
 
             // Act
